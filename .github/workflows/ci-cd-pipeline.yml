@@ -17,14 +17,17 @@ jobs:
   code-analysis:
     name: "Static code analysis"
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+        
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: '21'
+          
       - name: Run code analyzer
         run: mvn checkstyle:check
 
@@ -32,9 +35,11 @@ jobs:
     name: "Run automated tests"
     needs: code-analysis
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+        
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
@@ -50,13 +55,16 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+        
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: '21'
+          
       - name: Build jar
         run: mvn package
+        
       - name: Upload jar artifact
         uses: actions/upload-artifact@v5
         with:
@@ -71,13 +79,16 @@ jobs:
     steps:                         
       - name: Checkout repository
         uses: actions/checkout@v5
+        
       - name: Set up JDK
         uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: '21'
+          
       - name: Build jar
         run: mvn package -DskipTests
+        
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
