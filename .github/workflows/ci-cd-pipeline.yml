@@ -10,8 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  packages: write
+  contents: read
 
 jobs:
   code-analysis:
@@ -76,6 +75,8 @@ jobs:
     needs: jar-build
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:                         
       - name: Checkout repository
         uses: actions/checkout@v5
